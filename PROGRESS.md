@@ -18,6 +18,11 @@ pages, add/edit/delete templates) — no reply/DM logs are kept, only comment ID
   **https://byteflow-production-a5fb.up.railway.app**
 - Verified end-to-end locally and on Railway: login works, dashboard queries Supabase correctly
 - Dashboard login password: `Arabshah123@` (set in Railway variables + local `.env.local`)
+- Dashboard redesigned: real toggle switches (pages + templates), active-route nav highlighting,
+  card-based layout. "Load starter templates" button seeds 5 editable/deletable default comment
+  templates + 5 DM templates (link defaults to `https://your-link.com` — needs editing to the
+  real link before going live). All text/name fields now strip HTML tags on save
+  (`src/lib/sanitize.ts`) so pasted markup can't render broken on Facebook.
 
 ## Not done yet
 
