@@ -6,10 +6,15 @@ const inputClass =
   'w-full rounded-lg border border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 outline-none placeholder:text-neutral-600 focus:border-neutral-600'
 
 export default async function TemplatesPage() {
-  const [{ data: commentTemplates }, { data: dmTemplates }] = await Promise.all([
+  const [
+    { data: commentTemplates, error: commentError },
+    { data: dmTemplates, error: dmError },
+  ] = await Promise.all([
     supabase.from('comment_templates').select('*').order('created_at'),
     supabase.from('dm_templates').select('*').order('created_at'),
   ])
+  if (commentError) throw new Error(`Failed to load comment templates: ${commentError.message}`)
+  if (dmError) throw new Error(`Failed to load DM templates: ${dmError.message}`)
 
   const comments = commentTemplates ?? []
   const dms = dmTemplates ?? []

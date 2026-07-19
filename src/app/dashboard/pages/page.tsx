@@ -6,7 +6,8 @@ const inputClass =
   'w-full rounded-lg border border-neutral-800 bg-neutral-950 px-3 py-2 text-sm text-neutral-100 outline-none placeholder:text-neutral-600 focus:border-neutral-600'
 
 export default async function PagesPage() {
-  const { data: pages } = await supabase.from('pages').select('*').order('created_at')
+  const { data: pages, error } = await supabase.from('pages').select('*').order('created_at')
+  if (error) throw new Error(`Failed to load pages: ${error.message}`)
   const list = pages ?? []
   const activeCount = list.filter((p) => p.active).length
 
