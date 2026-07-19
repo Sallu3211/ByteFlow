@@ -26,9 +26,9 @@ pages, add/edit/delete templates) — no reply/DM logs are kept, only comment ID
 
 ## Not done yet
 
-1. **Meta App** — not created yet. Needs: developers.facebook.com/apps → Business app →
-   add Messenger product → copy App Secret → set as `META_APP_SECRET` in Railway variables
-   (currently empty there).
+1. ~~**Meta App**~~ — done. App "ByteFlow" created (App ID `1018585814425976`), use case
+   "Engage with customers on Messenger from Meta" selected, `META_APP_SECRET` set on Railway
+   and in local `.env.local`.
 2. **Webhook subscription** — once the Meta App exists, set webhook callback URL to
    `https://byteflow-production-a5fb.up.railway.app/api/webhook`, verify token =
    `byteflow-webhook-2026` (already set in Railway/`.env.local` as `WEBHOOK_VERIFY_TOKEN`),
