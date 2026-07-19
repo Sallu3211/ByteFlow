@@ -1,7 +1,7 @@
-import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { isAuthenticated } from '@/lib/auth'
 import { logout } from '@/app/login/actions'
+import { NavLink } from './NavLink'
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   if (!(await isAuthenticated())) {
@@ -10,23 +10,26 @@ export default async function DashboardLayout({ children }: { children: React.Re
 
   return (
     <div className="min-h-screen bg-neutral-950 text-neutral-100">
-      <nav className="flex items-center justify-between border-b border-neutral-800 px-6 py-4">
-        <div className="flex items-center gap-6">
-          <span className="font-semibold">ByteFlow</span>
-          <Link href="/dashboard/pages" className="text-sm text-neutral-400 hover:text-neutral-100">
-            Pages
-          </Link>
-          <Link href="/dashboard/templates" className="text-sm text-neutral-400 hover:text-neutral-100">
-            Templates
-          </Link>
+      <nav className="sticky top-0 z-10 border-b border-neutral-800/80 bg-neutral-950/90 backdrop-blur">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3">
+          <div className="flex items-center gap-6">
+            <span className="flex items-center gap-2 text-sm font-semibold tracking-tight">
+              <span className="h-2 w-2 rounded-full bg-emerald-500" />
+              ByteFlow
+            </span>
+            <div className="flex items-center gap-1">
+              <NavLink href="/dashboard/pages">Pages</NavLink>
+              <NavLink href="/dashboard/templates">Templates</NavLink>
+            </div>
+          </div>
+          <form action={logout}>
+            <button type="submit" className="text-sm text-neutral-500 hover:text-neutral-200">
+              Log out
+            </button>
+          </form>
         </div>
-        <form action={logout}>
-          <button type="submit" className="text-sm text-neutral-400 hover:text-neutral-100">
-            Log out
-          </button>
-        </form>
       </nav>
-      <main className="mx-auto max-w-4xl px-6 py-8">{children}</main>
+      <main className="mx-auto max-w-5xl px-6 py-10">{children}</main>
     </div>
   )
 }

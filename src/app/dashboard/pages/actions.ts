@@ -2,9 +2,10 @@
 
 import { revalidatePath } from 'next/cache'
 import { supabase } from '@/lib/supabase'
+import { sanitizeText } from '@/lib/sanitize'
 
 export async function addPage(formData: FormData) {
-  const name = String(formData.get('name') ?? '').trim()
+  const name = sanitizeText(String(formData.get('name') ?? ''))
   const page_id = String(formData.get('page_id') ?? '').trim()
   const access_token = String(formData.get('access_token') ?? '').trim()
   if (!name || !page_id || !access_token) return
